@@ -1,0 +1,248 @@
+# Flutter Marketplace App Development Prompt
+
+## Project Overview
+Create a cross-platform Flutter application (Web, iOS, Android) for a community-driven marketplace that enables users to buy, sell, give away items, and offer delivery services. Initially targeting the Syrian community with expansion plans to the broader Arab world and eventually global markets.
+
+## Core Mission
+Build a platform that empowers local communities, especially supporting older adults to generate income through selling homemade items and food, while providing an accessible marketplace for everyone.
+
+## Technical Architecture Requirements
+
+### 1. Microservices Architecture
+```
+├── User Service (Authentication, Profiles)
+├── Product Service (Listings, Categories)
+├── Chat Service (Real-time messaging)
+├── Location Service (Geolocation, Areas)
+├── Payment Service (COD, Electronic payments)
+├── Notification Service (Push notifications)
+├── File Service (Image upload/optimization)
+└── Delivery Service (Driver management)
+```
+
+### 2. Performance Optimization
+- **Small Component Architecture**: Break UI into micro-components (≤50 lines each)
+- **Lazy Loading**: Implement progressive loading for all screens
+- **Image Optimization**: 
+  - Multiple resolution support (low/medium/high)
+  - WebP format with fallbacks
+  - Compression pipeline for uploads
+- **Caching Strategy**: Local storage for frequently accessed data
+- **Offline Capability**: Essential features work without internet
+
+### 3. Cross-Platform Considerations
+- **Web-Specific**: Responsive design, SEO optimization, different navigation patterns
+- **Mobile-Specific**: Touch gestures, native performance, app store compliance
+- **Shared Logic**: 80% code reuse across platforms
+
+## Design System Requirements
+
+### 1. Create Comprehensive Design System First
+```
+design_system/
+├── colors.dart (Primary, secondary, semantic colors)
+├── typography.dart (Arabic & English font scales)
+├── spacing.dart (Consistent spacing units)
+├── components/
+│   ├── buttons.dart
+│   ├── cards.dart
+│   ├── inputs.dart
+│   ├── navigation.dart
+│   └── feedback.dart (loading, errors, success)
+├── themes/
+│   ├── light_theme.dart
+│   ├── dark_theme.dart
+│   └── rtl_support.dart
+└── assets/
+    ├── icons/
+    ├── images/
+    └── animations/
+```
+
+### 2. Design Principles
+- **Cultural Sensitivity**: RTL support, Arabic typography, culturally appropriate imagery
+- **Accessibility**: High contrast ratios, large touch targets, screen reader support
+- **Simplicity**: Minimal cognitive load, clear visual hierarchy
+- **Trust**: Professional appearance to build user confidence
+
+## Core Features Specification
+
+### 1. Authentication System
+- **Minimal Registration**: Email/phone + basic info only
+- **Social Login**: Google, Facebook, Apple
+- **Guest Browsing**: Allow viewing without account
+- **Multi-language**: Arabic (default), English
+
+### 2. Product Categories (Horizontal Scroll)
+```
+🛒 Used Items
+🧺 Homemade Pantry  
+🧶 Handmade Crafts
+🎁 Free Products
+🚚 Delivery Services (Future)
+```
+
+### 3. Screen Architecture
+
+#### Core Screens
+1. **SplashScreen** - App logo and loading
+2. **AuthenticationScreen** - Sign in/up with language selection
+3. **HomeScreen** - Categories + location-based products
+4. **ProductDetailScreen** - Full product info + chat button
+5. **ChatsScreen** - All conversations with status indicators
+6. **ProfileScreen** - User management + settings
+7. **FavoritesScreen** - Saved products
+8. **YourProductsScreen** - User's listings + add new
+
+#### Component Structure (Each screen ≤ 5 major components)
+```
+lib/
+├── core/ (shared utilities)
+├── design_system/
+├── services/ (microservice connectors)
+├── screens/
+│   └── each_screen/
+│       ├── screen.dart (main screen)
+│       ├── components/ (small widgets)
+│       ├── bloc/ (state management)
+│       └── models/ (screen-specific data)
+└── shared_components/ (cross-screen widgets)
+```
+
+### 4. Chat System
+- **Real-time Messaging**: WebSocket implementation
+- **Product Context**: Each chat linked to specific product
+- **Status Management**: Active, completed, blocked
+- **Media Sharing**: Image sharing for product clarification
+- **Auto-archive**: Conversations auto-archive after delivery
+
+### 5. Location & Delivery
+- **Location-based**: Show products within user's area first
+- **Delivery Integration**: Connect buyers with driver users
+- **Area Selection**: Manual area selection for privacy
+- **Distance Indicators**: Approximate distances to products
+
+## Technical Implementation Guidelines
+
+### 1. State Management
+- **BLoC Pattern**: For complex state management
+- **Provider**: For simple state sharing
+- **Local Storage**: Hive for offline data persistence
+
+### 2. API Architecture
+```dart
+// Microservice base structure
+abstract class BaseService {
+  String get baseUrl;
+  Map<String, String> get headers;
+  Future<ApiResponse<T>> get<T>(String endpoint);
+  Future<ApiResponse<T>> post<T>(String endpoint, Map<String, dynamic> data);
+}
+
+class ProductService extends BaseService {
+  Future<List<Product>> getProductsByLocation(String area);
+  Future<Product> createProduct(CreateProductRequest request);
+  // ... other methods
+}
+```
+
+### 3. Performance Monitoring
+- **Analytics**: User behavior tracking
+- **Crash Reporting**: Firebase Crashlytics
+- **Performance Metrics**: App performance monitoring
+- **Network Monitoring**: API response times and failures
+
+### 4. Security Requirements
+- **Data Encryption**: All sensitive data encrypted
+- **Image Security**: Automated content moderation
+- **User Privacy**: GDPR compliance, data anonymization
+- **Report System**: User reporting and blocking functionality
+
+## Development Phases
+
+### Phase 1: Foundation (Week 1-2)
+1. Setup project structure and design system
+2. Implement basic authentication
+3. Create core navigation structure
+4. Setup microservices architecture
+
+### Phase 2: Core Features (Week 3-4)
+1. Product listing and viewing
+2. Basic chat functionality
+3. User profiles and product management
+4. Location-based filtering
+
+### Phase 3: Advanced Features (Week 5-6)
+1. Payment integration (COD + electronic)
+2. Advanced filtering and search
+3. Notification system
+4. Performance optimization
+
+### Phase 4: Platform-Specific (Week 7-8)
+1. Web responsive design
+2. Mobile platform optimization
+3. App store preparation
+4. Final testing and bug fixes
+
+## README.md Structure Required
+
+```markdown
+# Community Marketplace App
+
+## Quick Start
+- Prerequisites
+- Installation commands (one-command setup)
+- Running on different platforms
+- Environment configuration
+
+## Development Guide
+- Project structure explanation
+- Design system usage
+- Adding new features
+- Testing procedures
+
+## Deployment
+- Build processes
+- Environment configurations
+- Store submission guidelines
+
+## Contributing
+- Code standards
+- Pull request process
+- Issue reporting
+```
+
+## Quality Assurance
+
+### 1. Testing Strategy
+- **Unit Tests**: 80%+ coverage for business logic
+- **Widget Tests**: All custom components
+- **Integration Tests**: Critical user flows
+- **Performance Tests**: Load testing on slow connections
+
+### 2. Accessibility Standards
+- **WCAG 2.1 AA**: Compliance for web platform
+- **Screen Reader**: Support for visually impaired users
+- **Keyboard Navigation**: Full web app keyboard accessibility
+- **Color Contrast**: Minimum 4.5:1 ratio
+
+### 3. Internationalization (i18n)
+- **RTL Support**: Complete right-to-left layout support
+- **Date/Number Formatting**: Locale-specific formatting
+- **Cultural Adaptation**: Region-specific features and imagery
+
+## Success Metrics
+- **Performance**: App loads in <3 seconds on 2G connections
+- **User Experience**: <5 taps to complete any primary action
+- **Accessibility**: 100% screen reader compatibility
+- **Code Quality**: 90%+ test coverage, 0 critical security vulnerabilities
+
+## Future Expansion Considerations
+- **Multi-currency**: Support for different currencies
+- **Advanced Delivery**: Route optimization for drivers
+- **AI Features**: Smart categorization, price suggestions
+- **Community Features**: User ratings, community boards
+
+---
+
+**Note**: This prompt assumes a team familiar with Flutter development. Adjust complexity based on team experience level. Prioritize MVP features for initial release, then iterate based on user feedback.
