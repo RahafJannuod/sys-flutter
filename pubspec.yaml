@@ -30,23 +30,23 @@ dependencies:
   go_router: ^12.1.1
   cached_network_image: ^3.3.0
 
-  # Authentication
-  firebase_auth: ^4.15.3
-  google_sign_in: ^6.1.6
+  # Authentication (temporarily disabled)
+  # firebase_auth: ^4.15.3
+  # google_sign_in: ^6.1.6
 
-  # Notifications
-  firebase_messaging: ^14.7.9
+  # Notifications (temporarily disabled)
+  # firebase_messaging: ^14.7.9
 
-  # Location
-  geolocator: ^10.1.0
+  # Location (temporarily disabled)
+  # geolocator: ^10.1.0
 
-  # Image handling
-  image_picker: ^1.0.4
+  # Image handling (temporarily disabled)
+  # image_picker: ^1.0.4
 
   # Internationalization
   flutter_localizations:
     sdk: flutter
-  intl: ^0.20.2
+  intl: ^0.18.1
 
   # Icons
   cupertino_icons: ^1.0.6
@@ -54,7 +54,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^2.0.3
 
   # Code Generation
   build_runner: ^2.4.7

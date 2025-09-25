@@ -44,6 +44,8 @@ class AppTheme {
       onError: Colors.white,
       surface: surface,
       onSurface: isDark ? AppColors.neutral100 : AppColors.textPrimary,
+      background: background,
+      onBackground: isDark ? AppColors.neutral100 : AppColors.textPrimary,
     );
 
     return ThemeData(
@@ -63,7 +65,7 @@ class AppTheme {
       ),
 
       // Card Theme
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         elevation: AppSpacing.elevation2,
         margin: const EdgeInsets.all(AppSpacing.s),
         shape: RoundedRectangleBorder(
@@ -188,7 +190,7 @@ class AppTheme {
       ),
 
       // Tab Bar Theme
-      tabBarTheme: TabBarThemeData(
+      tabBarTheme: TabBarTheme(
         labelColor: primary,
         unselectedLabelColor: AppColors.textSecondary,
         indicatorColor: primary,
