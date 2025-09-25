@@ -36,18 +36,8 @@ class LocationHeader extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    localizations.currentLocation,
-                    style: AppTypography.caption.copyWith(
-                      color: AppColors.primary,
-                    ),
-                  ),
-                  Text(
-                    'Damascus, Syria', // TODO: Get actual location
-                    style: AppTypography.englishBodyMedium.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  _LocationLabel(localizations: localizations),
+                  _LocationText(),
                 ],
               ),
             ),
@@ -58,6 +48,38 @@ class LocationHeader extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// Optimized const widgets for faster rebuilds
+class _LocationLabel extends StatelessWidget {
+  final AppLocalizations localizations;
+
+  const _LocationLabel({required this.localizations});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      localizations.currentLocation,
+      style: AppTypography.caption.copyWith(
+        color: AppColors.primary,
+      ),
+    );
+  }
+}
+
+class _LocationText extends StatelessWidget {
+  const _LocationText();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'Damascus, Syria', // TODO: Get actual location
+      style: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 14,
       ),
     );
   }

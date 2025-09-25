@@ -130,26 +130,11 @@ class _SplashScreenState extends State<SplashScreen>
                         builder: (context, child) {
                           return FadeTransition(
                             opacity: _fadeAnimation,
-                            child: Column(
+                            child: const Column(
                               children: [
-                                Text(
-                                  AppConfig.appName,
-                                  style: AppTypography.englishHeadlineLarge.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-
-                                const SizedBox(height: AppSpacing.m),
-
-                                Text(
-                                  'Connecting Communities',
-                                  style: AppTypography.englishBodyLarge.copyWith(
-                                    color: Colors.white.withOpacity(0.9),
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
+                                _AppTitle(),
+                                SizedBox(height: AppSpacing.m),
+                                _AppSubtitle(),
                               ],
                             ),
                           );
@@ -208,6 +193,38 @@ class _SplashScreenState extends State<SplashScreen>
           ),
         ),
       ),
+    );
+  }
+}
+
+// Optimized const widgets for faster rebuilds
+class _AppTitle extends StatelessWidget {
+  const _AppTitle();
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      AppConfig.appName,
+      style: AppTypography.englishHeadlineLarge.copyWith(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+      textAlign: TextAlign.center,
+    );
+  }
+}
+
+class _AppSubtitle extends StatelessWidget {
+  const _AppSubtitle();
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Connecting Communities',
+      style: AppTypography.englishBodyLarge.copyWith(
+        color: Colors.white.withValues(alpha: 0.9),
+      ),
+      textAlign: TextAlign.center,
     );
   }
 }
