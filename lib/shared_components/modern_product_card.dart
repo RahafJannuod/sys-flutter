@@ -55,11 +55,11 @@ class _ModernProductCardState extends State<ModernProductCard> {
             color: AppColors.cardBorder,
             width: 1,
           ),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: AppColors.cardShadow,
               blurRadius: 8,
-              offset: const Offset(0, 4),
+              offset: Offset(0, 4),
               spreadRadius: 0,
             ),
           ],
@@ -128,7 +128,9 @@ class _ModernProductCardState extends State<ModernProductCard> {
                         child: Icon(
                           _isFavorite ? Icons.favorite : Icons.favorite_border,
                           size: 18,
-                          color: _isFavorite ? AppColors.primary : AppColors.neutral600,
+                          color: _isFavorite
+                              ? AppColors.primary
+                              : AppColors.neutral600,
                         ),
                       ),
                     ),

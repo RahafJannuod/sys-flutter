@@ -60,7 +60,7 @@ class AppTheme {
         titleTextStyle: AppTypography.logoText.copyWith(
           color: AppColors.textPrimary,
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: AppColors.textPrimary,
         ),
       ),
@@ -70,7 +70,8 @@ class AppTheme {
         elevation: 2, // Subtle shadow
         margin: const EdgeInsets.all(AppSpacing.s),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSpacing.radiusM), // Rounded corners
+          borderRadius:
+              BorderRadius.circular(AppSpacing.radiusM), // Rounded corners
           side: const BorderSide(
             color: AppColors.cardBorder,
             width: 0.5,
@@ -92,7 +93,8 @@ class AppTheme {
           ),
           minimumSize: const Size(double.infinity, AppSpacing.minTouchTarget),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSpacing.radiusS), // Less rounded for CUI
+            borderRadius: BorderRadius.circular(
+                AppSpacing.radiusS), // Less rounded for CUI
           ),
           textStyle: AppTypography.buttonLarge.copyWith(
             fontWeight: FontWeight.w600,
@@ -104,7 +106,8 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.filterButtonText,
-          backgroundColor: AppColors.filterButtonBackground, // Light gray background
+          backgroundColor:
+              AppColors.filterButtonBackground, // Light gray background
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.l,
             vertical: AppSpacing.s,

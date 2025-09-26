@@ -33,12 +33,24 @@ class _ModernEcommerceScreenState extends State<ModernEcommerceScreen> {
   ];
 
   final List<String> categories = [
+    'All',
+    'Gifts & Exchange',
+    'Homemade Pantry',
+    'Handmade Crafts',
+    'Car, Bicycle & Boat',
+    'Services',
+    'Admission Tickets & Tickets',
     'Electronics',
-    'Fashion',
+    'Family & Child',
+    'Leisure, Hobbies & Surroundings',
     'Home & Garden',
-    'Sports & Recreation',
-    'Automotive',
-    'Books & Media',
+    'Pets',
+    'Property',
+    'Jobs',
+    'Fashion & Beauty',
+    'Music, Movies & Books',
+    'Live Help',
+    'Lessons & Courses',
   ];
 
   final List<String> priceRanges = [
