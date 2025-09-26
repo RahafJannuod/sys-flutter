@@ -7,6 +7,11 @@ import '../../core/localization/app_localizations.dart';
 import '../../design_system/colors/app_colors.dart';
 import '../../design_system/spacing/app_spacing.dart';
 import '../../design_system/typography/app_typography.dart';
+import '../../shared_components/modern_navigation_bar.dart';
+import '../../shared_components/modern_search_bar.dart';
+import '../../shared_components/modern_filter_dropdown.dart';
+import '../../shared_components/filter_action_buttons.dart';
+import '../../shared_components/modern_product_card.dart';
 import 'components/category_selector.dart';
 import 'components/product_grid.dart';
 import 'components/search_bar.dart';
@@ -30,11 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _loadProducts({bool refresh = false}) {
     context.read<ProductsBloc>().add(
-      ProductsLoadRequested(
-        category: _selectedCategory,
-        refresh: refresh,
-      ),
-    );
+          ProductsLoadRequested(
+            category: _selectedCategory,
+            refresh: refresh,
+          ),
+        );
   }
 
   void _onCategorySelected(String? category) {
@@ -87,7 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   onLocationTap: () {
                     // TODO: Implement location selection
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Location selection will be implemented')),
+                      const SnackBar(
+                          content:
+                              Text('Location selection will be implemented')),
                     );
                   },
                 ),
@@ -150,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: AppColors.error,
                             ),
                             const SizedBox(height: AppSpacing.l),
-                            Text(
+                            const Text(
                               'Error loading products',
                               style: AppTypography.englishTitleMedium,
                             ),
@@ -188,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: AppColors.neutral500,
                               ),
                               const SizedBox(height: AppSpacing.l),
-                              Text(
+                              const Text(
                                 'No products found',
                                 style: AppTypography.englishTitleMedium,
                               ),
@@ -231,12 +238,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           // TODO: Navigate to add product screen
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Add product screen will be implemented')),
+            const SnackBar(
+                content: Text('Add product screen will be implemented')),
           );
         },
         icon: const Icon(Icons.add),

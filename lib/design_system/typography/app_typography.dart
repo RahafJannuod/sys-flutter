@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class AppTypography {
   AppTypography._();
 
-  // Font Families (using system fonts for now)
+  // Font Families - Clean, modern sans-serif fonts
   static const String? arabicFont = null; // System Arabic font
-  static const String? englishFont = null; // System default font
+  static const String englishFont = 'Roboto'; // Clean, readable sans-serif
 
   // Base font sizes (following Material Design type scale)
   static const double displayLarge = 57.0;
@@ -161,4 +161,77 @@ class AppTypography {
   static TextStyle medium(TextStyle baseStyle) {
     return baseStyle.copyWith(fontWeight: FontWeight.w500);
   }
+
+  // CUI Design Specific Styles
+  // Section Titles - Large, bold font for "Newest Products," "Explore"
+  static const TextStyle sectionTitle = TextStyle(
+    fontFamily: englishFont,
+    fontSize: 24.0,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0,
+    height: 1.2,
+  );
+
+  // Product Name - Standard size, bold for product names
+  static const TextStyle productName = TextStyle(
+    fontFamily: englishFont,
+    fontSize: 16.0,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.15,
+    height: 1.3,
+  );
+
+  // Product Price - Bold red text for pricing
+  static const TextStyle productPrice = TextStyle(
+    fontFamily: englishFont,
+    fontSize: 16.0,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.15,
+    height: 1.3,
+  );
+
+  // Location Text - Smaller, lighter font for location details
+  static const TextStyle locationText = TextStyle(
+    fontFamily: englishFont,
+    fontSize: 12.0,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.4,
+    height: 1.33,
+  );
+
+  // Filter Button Text - Medium weight for filter buttons
+  static const TextStyle filterButton = TextStyle(
+    fontFamily: englishFont,
+    fontSize: 14.0,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.25,
+    height: 1.2,
+  );
+
+  // Navigation Text - Small text for bottom navigation
+  static const TextStyle navigationLabel = TextStyle(
+    fontFamily: englishFont,
+    fontSize: 11.0,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    height: 1.45,
+  );
+
+  // Search Placeholder - Medium weight for search hints
+  static const TextStyle searchHint = TextStyle(
+    fontFamily: englishFont,
+    fontSize: 16.0,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.15,
+    height: 1.5,
+  );
+
+  // App Logo Text - Bold for SYS Souq branding
+  static const TextStyle logoText = TextStyle(
+    fontFamily: englishFont,
+    fontSize: 20.0,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.15,
+    height: 1.2,
+  );
 }

@@ -25,6 +25,9 @@ class RouteNames {
   static const String about = '/about';
   static const String help = '/help';
 
+  // Modern Design Screen
+  static const String modernEcommerce = '/modern-ecommerce';
+
   // Helper methods for navigation with parameters
   static String productDetailPath(String productId) =>
       '$productDetail/$productId';

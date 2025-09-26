@@ -20,9 +20,9 @@ class LocationHeader extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.m),
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(0.1),
+          color: AppColors.primary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppSpacing.radiusM),
-          border: Border.all(color: AppColors.primary.withOpacity(0.2)),
+          border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
         ),
         child: Row(
           children: [
@@ -37,7 +37,7 @@ class LocationHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _LocationLabel(localizations: localizations),
-                  _LocationText(),
+                  const _LocationText(),
                 ],
               ),
             ),

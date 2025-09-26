@@ -10,6 +10,7 @@ import '../../screens/favorites/favorites_screen.dart';
 import '../../screens/profile/profile_screen.dart';
 import '../../screens/your_products/your_products_screen.dart';
 import '../../screens/add_product/add_product_screen.dart';
+import '../../screens/modern_ecommerce_screen.dart';
 import '../../shared_components/bottom_navigation_wrapper.dart';
 import 'route_names.dart';
 
@@ -37,11 +38,11 @@ class AppRouter {
           return BottomNavigationWrapper(child: child);
         },
         routes: [
-          // Home Screen
+          // Home Screen (Modern E-commerce Design)
           GoRoute(
             path: RouteNames.home,
             name: RouteNames.home,
-            builder: (context, state) => const HomeScreen(),
+            builder: (context, state) => const ModernEcommerceScreen(),
           ),
 
           // Chats Screen

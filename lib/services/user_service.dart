@@ -4,9 +4,12 @@ import '../../core/config/app_config.dart';
 import '../models/user_model.dart';
 import 'base/api_response.dart';
 import 'base/base_service.dart';
+import 'mock_user_service.dart';
 
 class UserService extends BaseService {
   UserService() : super(servicePath: AppConfig.serviceEndpoints['user']!);
+
+  final MockUserService _mockService = MockUserService();
 
   @override
   String get servicePath => AppConfig.serviceEndpoints['user']!;
@@ -15,14 +18,8 @@ class UserService extends BaseService {
     required String email,
     required String password,
   }) async {
-    return await post<UserModel>(
-      '/auth/login',
-      {
-        'email': email,
-        'password': password,
-      },
-      fromJson: UserModel.fromJson,
-    );
+    // Use mock service for development/testing
+    return await _mockService.authenticate(email: email, password: password);
   }
 
   Future<ApiResponse<UserModel>> register({
@@ -31,15 +28,12 @@ class UserService extends BaseService {
     required String name,
     String? phoneNumber,
   }) async {
-    return await post<UserModel>(
-      '/auth/register',
-      {
-        'email': email,
-        'password': password,
-        'name': name,
-        'phone_number': phoneNumber,
-      },
-      fromJson: UserModel.fromJson,
+    // Use mock service for development/testing
+    return await _mockService.register(
+      email: email,
+      password: password,
+      name: name,
+      phoneNumber: phoneNumber,
     );
   }
 

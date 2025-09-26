@@ -106,7 +106,7 @@ class _SplashScreenState extends State<SplashScreen>
                                   borderRadius: BorderRadius.circular(AppSpacing.radiusXXL),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.2),
+                                      color: Colors.black.withValues(alpha: 0.2),
                                       blurRadius: 20,
                                       offset: const Offset(0, 8),
                                     ),
@@ -162,7 +162,7 @@ class _SplashScreenState extends State<SplashScreen>
                           Text(
                             'Loading...',
                             style: AppTypography.englishBodyMedium.copyWith(
-                              color: Colors.white.withOpacity(0.8),
+                              color: Colors.white.withValues(alpha: 0.8),
                             ),
                           ),
                         ],
@@ -182,7 +182,7 @@ class _SplashScreenState extends State<SplashScreen>
                       child: Text(
                         'Version ${AppConfig.appVersion}',
                         style: AppTypography.caption.copyWith(
-                          color: Colors.white.withOpacity(0.6),
+                          color: Colors.white.withValues(alpha: 0.6),
                         ),
                       ),
                     );

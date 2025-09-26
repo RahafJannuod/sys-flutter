@@ -1,10 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../services/user_service.dart';
+import '../../services/mock_user_service.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserService userService;
+  final MockUserService mockUserService = MockUserService();
 
   AuthBloc({required this.userService}) : super(AuthInitial()) {
     on<AuthCheckRequested>(_onAuthCheckRequested);
@@ -41,6 +43,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthLoginRequested event,
     Emitter<AuthState> emit,
   ) async {
+    print('AuthBloc: Login requested for ${event.email}');
     emit(AuthLoading());
 
     try {
@@ -49,13 +52,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         password: event.password,
       );
 
+      print('AuthBloc: Response received - success: ${response.success}');
+
       if (response.success && response.data != null) {
+        print('AuthBloc: Emitting AuthAuthenticated');
         emit(AuthAuthenticated(user: response.data!));
       } else {
+        print('AuthBloc: Emitting AuthError: ${response.message}');
         emit(AuthError(message: response.message ?? 'Login failed'));
       }
     } catch (e) {
-      emit(AuthError(message: e.toString()));
+      String errorMessage = 'Unable to connect to server. Please check your internet connection and try again.';
+
+      if (e.toString().contains('SocketException')) {
+        errorMessage = 'No internet connection. Please check your network settings.';
+      } else if (e.toString().contains('TimeoutException') || e.toString().contains('timeout')) {
+        errorMessage = 'Connection timeout. Please try again.';
+      } else if (e.toString().contains('HandshakeException')) {
+        errorMessage = 'SSL connection error. Please check your network settings.';
+      }
+
+      emit(AuthError(message: errorMessage));
     }
   }
 
@@ -79,7 +96,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthError(message: response.message ?? 'Registration failed'));
       }
     } catch (e) {
-      emit(AuthError(message: e.toString()));
+      String errorMessage = 'Unable to connect to server. Please check your internet connection and try again.';
+
+      if (e.toString().contains('SocketException')) {
+        errorMessage = 'No internet connection. Please check your network settings.';
+      } else if (e.toString().contains('TimeoutException') || e.toString().contains('timeout')) {
+        errorMessage = 'Connection timeout. Please try again.';
+      } else if (e.toString().contains('HandshakeException')) {
+        errorMessage = 'SSL connection error. Please check your network settings.';
+      }
+
+      emit(AuthError(message: errorMessage));
     }
   }
 

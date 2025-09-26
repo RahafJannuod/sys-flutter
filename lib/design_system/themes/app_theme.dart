@@ -7,22 +7,22 @@ class AppTheme {
   AppTheme._();
 
   static ThemeData get lightTheme => _buildTheme(
-    brightness: Brightness.light,
-    primary: AppColors.primary,
-    secondary: AppColors.secondary,
-    background: AppColors.backgroundLight,
-    surface: AppColors.surfaceLight,
-    error: AppColors.error,
-  );
+        brightness: Brightness.light,
+        primary: AppColors.primary,
+        secondary: AppColors.secondary,
+        background: AppColors.backgroundLight,
+        surface: AppColors.surfaceLight,
+        error: AppColors.error,
+      );
 
   static ThemeData get darkTheme => _buildTheme(
-    brightness: Brightness.dark,
-    primary: AppColors.primaryLight,
-    secondary: AppColors.secondaryLight,
-    background: AppColors.backgroundDark,
-    surface: AppColors.surfaceDark,
-    error: AppColors.error,
-  );
+        brightness: Brightness.dark,
+        primary: AppColors.primaryLight,
+        secondary: AppColors.secondaryLight,
+        background: AppColors.backgroundDark,
+        surface: AppColors.surfaceDark,
+        error: AppColors.error,
+      );
 
   static ThemeData _buildTheme({
     required Brightness brightness,
@@ -44,8 +44,6 @@ class AppTheme {
       onError: Colors.white,
       surface: surface,
       onSurface: isDark ? AppColors.neutral100 : AppColors.textPrimary,
-      background: background,
-      onBackground: isDark ? AppColors.neutral100 : AppColors.textPrimary,
     );
 
     return ThemeData(
@@ -55,57 +53,68 @@ class AppTheme {
 
       // AppBar Theme
       appBarTheme: AppBarTheme(
-        backgroundColor: surface,
-        foregroundColor: colorScheme.onSurface,
-        elevation: AppSpacing.elevation1,
+        backgroundColor: AppColors.backgroundLight,
+        foregroundColor: AppColors.textPrimary,
+        elevation: 0, // Clean flat design
         centerTitle: false,
-        titleTextStyle: AppTypography.englishTitleLarge.copyWith(
-          color: colorScheme.onSurface,
+        titleTextStyle: AppTypography.logoText.copyWith(
+          color: AppColors.textPrimary,
+        ),
+        iconTheme: IconThemeData(
+          color: AppColors.textPrimary,
         ),
       ),
 
-      // Card Theme
-      cardTheme: CardTheme(
-        elevation: AppSpacing.elevation2,
+      // Card Theme - Clean white cards with subtle shadows
+      cardTheme: CardThemeData(
+        elevation: 2, // Subtle shadow
         margin: const EdgeInsets.all(AppSpacing.s),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSpacing.radiusL),
+          borderRadius: BorderRadius.circular(AppSpacing.radiusM), // Rounded corners
+          side: const BorderSide(
+            color: AppColors.cardBorder,
+            width: 0.5,
+          ),
         ),
-        color: surface,
+        color: AppColors.cardBackground,
+        shadowColor: AppColors.cardShadow,
       ),
 
-      // Elevated Button Theme
+      // Elevated Button Theme - Red CTA buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: primary,
+          backgroundColor: AppColors.primary, // Red background
           foregroundColor: AppColors.textOnPrimary,
-          elevation: AppSpacing.elevation2,
+          elevation: 2,
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.xl,
             vertical: AppSpacing.m,
           ),
           minimumSize: const Size(double.infinity, AppSpacing.minTouchTarget),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSpacing.radiusM),
+            borderRadius: BorderRadius.circular(AppSpacing.radiusS), // Less rounded for CUI
           ),
-          textStyle: AppTypography.buttonLarge,
+          textStyle: AppTypography.buttonLarge.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
 
-      // Outlined Button Theme
+      // Outlined Button Theme - Filter button style
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: primary,
+          foregroundColor: AppColors.filterButtonText,
+          backgroundColor: AppColors.filterButtonBackground, // Light gray background
           padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.xl,
-            vertical: AppSpacing.m,
+            horizontal: AppSpacing.l,
+            vertical: AppSpacing.s,
           ),
-          minimumSize: const Size(double.infinity, AppSpacing.minTouchTarget),
+          minimumSize: const Size(0, 36), // Pill-shaped height
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSpacing.radiusM),
+            borderRadius: BorderRadius.circular(18), // Pill-shaped
           ),
-          side: BorderSide(color: primary),
-          textStyle: AppTypography.buttonLarge,
+          side: const BorderSide(color: AppColors.borderLight),
+          textStyle: AppTypography.filterButton,
         ),
       ),
 
@@ -121,43 +130,46 @@ class AppTheme {
         ),
       ),
 
-      // Input Decoration Theme
+      // Input Decoration Theme - Search bar styling
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: isDark ? AppColors.neutral800 : AppColors.neutral50,
-        contentPadding: const EdgeInsets.all(AppSpacing.l),
+        fillColor: AppColors.searchBarBackground, // Light gray background
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.l,
+          vertical: AppSpacing.m,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusM),
-          borderSide: BorderSide(
-            color: isDark ? AppColors.borderDark : AppColors.borderLight,
+          borderSide: const BorderSide(
+            color: AppColors.searchBarBorder,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusM),
-          borderSide: BorderSide(
-            color: isDark ? AppColors.borderDark : AppColors.borderLight,
+          borderSide: const BorderSide(
+            color: AppColors.searchBarBorder,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusM),
-          borderSide: BorderSide(color: primary, width: 2),
+          borderSide: const BorderSide(color: AppColors.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusM),
           borderSide: const BorderSide(color: AppColors.error, width: 2),
         ),
-        labelStyle: AppTypography.englishBodyMedium.copyWith(
+        labelStyle: AppTypography.searchHint.copyWith(
           color: AppColors.textSecondary,
         ),
-        hintStyle: AppTypography.englishBodyMedium.copyWith(
-          color: AppColors.textDisabled,
+        hintStyle: AppTypography.searchHint.copyWith(
+          color: AppColors.searchBarHint,
         ),
       ),
 
       // Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: isDark ? AppColors.neutral700 : AppColors.neutral200,
-        selectedColor: primary.withOpacity(0.2),
+        selectedColor: AppColors.primary.withValues(alpha: 0.1),
         labelStyle: AppTypography.englishBodyMedium,
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.m,
@@ -180,17 +192,24 @@ class AppTheme {
         ),
       ),
 
-      // Bottom Navigation Bar Theme
+      // Bottom Navigation Bar Theme - Clean white with red accents
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: surface,
-        selectedItemColor: primary,
-        unselectedItemColor: AppColors.textSecondary,
+        backgroundColor: AppColors.navigationBackground,
+        selectedItemColor: AppColors.navigationSelected, // Red for selected
+        unselectedItemColor: AppColors.navigationUnselected,
         type: BottomNavigationBarType.fixed,
-        elevation: AppSpacing.elevation8,
+        elevation: 8,
+        selectedLabelStyle: AppTypography.navigationLabel.copyWith(
+          color: AppColors.navigationSelected,
+          fontWeight: FontWeight.w600,
+        ),
+        unselectedLabelStyle: AppTypography.navigationLabel.copyWith(
+          color: AppColors.navigationUnselected,
+        ),
       ),
 
       // Tab Bar Theme
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: TabBarThemeData(
         labelColor: primary,
         unselectedLabelColor: AppColors.textSecondary,
         indicatorColor: primary,
@@ -217,18 +236,23 @@ class AppTheme {
   }
 
   static TextTheme _buildTextTheme(bool isDark) {
-    final Color textColor = isDark ? AppColors.neutral100 : AppColors.textPrimary;
-    final Color textColorSecondary = isDark ? AppColors.neutral300 : AppColors.textSecondary;
+    final Color textColor =
+        isDark ? AppColors.neutral100 : AppColors.textPrimary;
+    final Color textColorSecondary =
+        isDark ? AppColors.neutral300 : AppColors.textSecondary;
 
     return TextTheme(
-      displayLarge: AppTypography.englishDisplayLarge.copyWith(color: textColor),
-      headlineLarge: AppTypography.englishHeadlineLarge.copyWith(color: textColor),
+      displayLarge:
+          AppTypography.englishDisplayLarge.copyWith(color: textColor),
+      headlineLarge:
+          AppTypography.englishHeadlineLarge.copyWith(color: textColor),
       titleLarge: AppTypography.englishTitleLarge.copyWith(color: textColor),
       bodyLarge: AppTypography.englishBodyLarge.copyWith(color: textColor),
       bodyMedium: AppTypography.englishBodyMedium.copyWith(color: textColor),
       bodySmall: AppTypography.caption.copyWith(color: textColorSecondary),
       labelLarge: AppTypography.buttonLarge.copyWith(color: textColor),
-      labelMedium: AppTypography.buttonMedium.copyWith(color: textColorSecondary),
+      labelMedium:
+          AppTypography.buttonMedium.copyWith(color: textColorSecondary),
     );
   }
 }
