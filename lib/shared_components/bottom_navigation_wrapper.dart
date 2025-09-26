@@ -22,7 +22,6 @@ class _BottomNavigationWrapperState extends State<BottomNavigationWrapper> {
     RouteNames.chats,
     RouteNames.favorites,
     RouteNames.yourProducts,
-    RouteNames.profile,
   ];
 
   void _onItemTapped(int index) {
@@ -102,11 +101,6 @@ class _BottomNavigationWrapperState extends State<BottomNavigationWrapper> {
               icon: const Icon(Icons.inventory_outlined),
               activeIcon: const Icon(Icons.inventory),
               label: localizations.yourProducts,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.person_outline),
-              activeIcon: const Icon(Icons.person),
-              label: localizations.profile,
             ),
           ],
         ),

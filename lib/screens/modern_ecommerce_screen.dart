@@ -6,6 +6,7 @@ import '../shared_components/modern_search_bar.dart';
 import '../shared_components/modern_filter_dropdown.dart';
 import '../shared_components/filter_action_buttons.dart';
 import '../shared_components/modern_product_card.dart';
+import '../shared_components/hamburger_dropdown.dart';
 
 class ModernEcommerceScreen extends StatefulWidget {
   const ModernEcommerceScreen({super.key});
@@ -20,6 +21,7 @@ class _ModernEcommerceScreenState extends State<ModernEcommerceScreen> {
   String? selectedPriceRange;
   String? selectedItemType;
   String? selectedCondition;
+  bool _isMenuVisible = false;
 
   // Sample data for dropdowns
   final List<String> locations = [
@@ -114,11 +116,27 @@ class _ModernEcommerceScreenState extends State<ModernEcommerceScreen> {
     );
   }
 
+  void _toggleMenu() {
+    setState(() {
+      _isMenuVisible = !_isMenuVisible;
+    });
+  }
+
+  void _closeMenu() {
+    setState(() {
+      _isMenuVisible = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
-      appBar: const ModernNavigationBar(),
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: AppColors.backgroundLight,
+          appBar: ModernNavigationBar(
+            onMenuTap: _toggleMenu,
+          ),
       body: Column(
         children: [
           // Search Bar
@@ -235,6 +253,29 @@ class _ModernEcommerceScreenState extends State<ModernEcommerceScreen> {
           ),
         ],
       ),
+        ),
+
+        // Hamburger Dropdown
+        HamburgerDropdown(
+          isVisible: _isMenuVisible,
+          onClose: _closeMenu,
+          onProfileTap: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Profile tapped')),
+            );
+          },
+          onSettingsTap: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Settings tapped')),
+            );
+          },
+          onSignOutTap: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Sign out tapped')),
+            );
+          },
+        ),
+      ],
     );
   }
 }
